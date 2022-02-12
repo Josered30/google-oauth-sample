@@ -10,7 +10,8 @@ const googleClient = new OAuth2Client(
 
 export async function auth(req: Request, res: Response) {
   const authorizeUrl = googleClient.generateAuthUrl({
-    access_type: "offline",
+    access_type: "online",
+    prompt: "consent",
     scope: "https://www.googleapis.com/auth/userinfo.profile",
   });
 
@@ -29,10 +30,9 @@ export async function authCallback(req: Request, res: Response) {
     accessToken.tokens.access_token ?? ""
   );
 
-  googleClient.setCredentials(accessToken.tokens);
-  const response = await googleClient.request({
-    url: "https://www.googleapis.com/oauth2/v1/userinfo",
-  });
+ 
 
-  res.status(200).json(response);
+
+
+  res.status(200).json({});
 }
