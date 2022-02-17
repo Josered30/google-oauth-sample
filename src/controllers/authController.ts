@@ -30,5 +30,10 @@ export async function authCallback(req: Request, res: Response) {
     accessToken.tokens.access_token ?? ""
   );
 
-  res.status(200).json({});
+  googleClient.setCredentials(accessToken.tokens);
+  const response = await googleClient.request({
+    url: "https://www.googleapis.com/oauth2/v1/userinfo",
+  });
+
+  res.status(200).json(response);
 }
