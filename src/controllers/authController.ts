@@ -30,9 +30,5 @@ export async function authCallback(req: Request, res: Response) {
     accessToken.tokens.access_token ?? ""
   );
 
- 
-
-
-
   res.status(200).json({});
 }
